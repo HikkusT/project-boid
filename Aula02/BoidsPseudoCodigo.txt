@@ -1,0 +1,40 @@
+Align()
+{
+    somaVelocidades = (0, 0)
+
+    for vizinho in vizinhos
+    {
+        somaVelocidades += vizinho.velocity.normalized  
+    }
+
+    velocidadeDesejada = somaVelocidades / vizinhos.count
+    steerTowards(velocidadeDesejada)
+}
+
+Cohesion()
+{
+    somaPosicoes = (0, 0)
+
+    for vizinho in vizinhos
+    {
+        somaPosicoes += vizinho.poistion
+    }
+
+    centroDeMassa = somaPosicoes / vizinhos.count
+    velocidadeDesejada = centroDeMassa - position
+    steerTowards(velocidadeDesejada)
+}
+
+Separation()
+{
+    somaRepulsao = (0, 0)
+
+    for vizinho in vizinhos
+    {
+        delta = position - vizinho.position
+        somaRepulsao += delta / delta.sqrMagnitude
+    }
+
+    velocidadeDesejada = somaRepulsao / vizinhos.count
+    steerTowards(velocidadeDesejada)
+}
